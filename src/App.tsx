@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {ChangeEvent} from 'react';
 import './App.css';
+import {IoFolderOpenOutline} from "react-icons/all";
 
+function changeHandler(event: ChangeEvent<HTMLInputElement>) {
+  console.log("changehandler: " + event.target.value)
+}
+
+// }
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="file-input">
+          <label htmlFor="file-input"><IoFolderOpenOutline/> Select the csv file ...
+          </label>
+          <input id="file-input" type="file" onChange={changeHandler}/>
+        </div>
+      </div>
   );
 }
 
