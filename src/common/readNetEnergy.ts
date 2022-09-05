@@ -1,5 +1,3 @@
-import path from "path"
-import * as fs from "fs"
 // @ts-ignore
 import {parse} from "papaparse"
 
@@ -11,7 +9,17 @@ export type NetEnergy = {
   imported: number
 };
 
-function toNetEnergy(row: string[]) {
+export function readNetEnergy(content: string): NetEnergy[] {
+  const data = parse(content)
+  const rows = data.data;
+  rows.shift()
+
+  return rows.filter((element: string[]) => {
+    return element.length === 5
+  }).map(toNetEnergy)
+}
+
+function toNetEnergy(row: string[]): NetEnergy {
   const energy: NetEnergy = {
     date: new Date(row[0]),
     production: parseInt(row[1]),
@@ -20,16 +28,4 @@ function toNetEnergy(row: string[]) {
     imported: parseInt(row[4])
   }
   return energy
-}
-
-export function readNetEnergy(fileName: string) {
-  const file = path.resolve(__dirname, fileName)
-  const fileContent = fs.readFileSync(file, {encoding: 'utf-8'})
-  const data = parse(fileContent)
-  const rows = data.data;
-  rows.shift();
-  
-  return rows.filter((element: string[]) => {
-    return element.length === 5
-  }).map(toNetEnergy)
 }
