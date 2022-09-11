@@ -1,7 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {IoFolderOpenOutline} from "react-icons/all";
-import {NetEnergy, readNetEnergy} from "./common/readNetEnergy";
+import {readNetEnergy} from "./energies/readNetEnergy";
+import {NetEnergy} from "./energies/NetEnergy";
 
 function App() {
   // data state variable defaulted to an empty array

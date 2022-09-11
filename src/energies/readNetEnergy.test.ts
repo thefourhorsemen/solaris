@@ -1,6 +1,7 @@
-import {NetEnergy, readNetEnergy} from "./readNetEnergy";
+import {readNetEnergy} from "./readNetEnergy";
 import path from "path";
 import fs from "fs";
+import {NetEnergy} from "./NetEnergy";
 
 test('read a csv containg net energy entries', () => {
   const expecteds: NetEnergy[] = [{
@@ -20,6 +21,7 @@ test('read a csv containg net energy entries', () => {
   const file = path.resolve(__dirname, 'sample-net-energy.csv')
   const fileContent = fs.readFileSync(file, {encoding: 'utf-8'})
 
-  expect(readNetEnergy(fileContent)).toEqual(expecteds)
+  const actuals = readNetEnergy(fileContent);
+  expect(actuals).toEqual(expecteds)
 });
 
