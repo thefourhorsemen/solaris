@@ -3,6 +3,7 @@ import './App.css';
 import {IoFolderOpenOutline} from "react-icons/all";
 import {readNetEnergy} from "./energies/readNetEnergy";
 import {NetEnergy} from "./energies/NetEnergy";
+import NetEnergiesTable from "./energies/NetEnergiesTable";
 
 function App() {
   // data state variable defaulted to an empty array
@@ -32,30 +33,7 @@ function App() {
         </div>
 
         <div className="container">
-          <h1>Simple Inventory Table</h1>
-          <table>
-            <thead>
-            <tr>
-              <th>Production</th>
-              <th>Consumption</th>
-              <th>Imported</th>
-              <th>Exported</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              netEnergies.map((item) => (
-                  <tr>
-                    <td>{item.production}</td>
-                    <td>{item.consumption}</td>
-                    <td>{item.imported}</td>
-                    <td>{item.exported}</td>
-                    <td/>
-                  </tr>
-              ))
-            }
-            </tbody>
-          </table>
+          <NetEnergiesTable energies={netEnergies}/>
         </div>
       </div>
   );
