@@ -4,7 +4,7 @@ import {NetEnergy} from "./NetEnergy";
 
 export function readNetEnergy(content: string): NetEnergy[] {
   const data = parse(content)
-  const rows = data.data;
+  const rows = data.data
   rows.shift()
 
   return rows.filter((element: string[]) => {

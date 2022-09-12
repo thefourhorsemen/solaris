@@ -1,17 +1,26 @@
+import {DateTime} from "luxon"
+
 export class NetEnergy {
-  date: Date | undefined
-  production: number | undefined
-  consumption: number | undefined
-  exported: number | undefined
-  imported: number | undefined
+  date: Date
+  production: number
+  consumption: number
+  exported: number
+  imported: number
 
   static of(row: string[]): NetEnergy {
-    return {
-      date: new Date(row[0]),
-      production: parseInt(row[1]),
-      consumption: parseInt(row[2]),
-      exported: parseInt(row[3]),
-      imported: parseInt(row[4])
-    }
+    const date = DateTime.fromFormat(row[0], 'yyyy-MM-dd hh:mm:ss ZZZ').toJSDate()
+    const production = parseInt(row[1])
+    const consumption = parseInt(row[2])
+    const exported = parseInt(row[3])
+    const imported = parseInt(row[4])
+    return new NetEnergy(date, production, consumption, exported, imported)
+  }
+
+  private constructor(date: Date, production: number, consumption: number, exported: number, imported: number) {
+    this.date = date
+    this.production = production
+    this.consumption = consumption
+    this.exported = exported
+    this.imported = imported
   }
 }
