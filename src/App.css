@@ -24,6 +24,10 @@
   color: white;
 }
 
+.file-input > input {
+  display: none;
+}
+
 .App-link {
   color: #61dafb;
 }

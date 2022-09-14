@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
+import {IoFolderOpenOutline} from "react-icons/all";
+import {readNetEnergy} from "./energies/readNetEnergy";
+import {NetEnergy} from "./energies/NetEnergy";
+import NetEnergiesTable from "./energies/NetEnergiesTable";
 
 function App() {
+  // data state variable defaulted to an empty array
+  const initialState: NetEnergy[] = []
+  const [netEnergies, setNetEnergies] = useState(initialState);
+
+  function changeHandler(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault()
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      // @ts-ignore
+      const content = e.target.result
+      // @ts-ignore
+      const energies = readNetEnergy(content)
+      setNetEnergies(energies)
+    }
+    // @ts-ignore
+    reader.readAsText(event.target.files[0])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="file-input">
+          <label htmlFor="file-input"><IoFolderOpenOutline/> Select the csv file ...
+          </label>
+          <input id="file-input" type="file" onChange={changeHandler}/>
+        </div>
+
+        <div className="container">
+          <NetEnergiesTable energies={netEnergies}/>
+        </div>
+      </div>
   );
 }
 
