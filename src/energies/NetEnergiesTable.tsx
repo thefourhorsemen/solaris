@@ -5,7 +5,7 @@ interface NetEnergyListProps {
   energies: NetEnergy[];
 }
 
-function NetEnergiesTable({energies}: NetEnergyListProps) {
+const NetEnergiesTable = ({energies}: NetEnergyListProps) => {
   const rows = energies.map((energy) => (
       <tr>
         <td>{energy.date.toString()}</td>
