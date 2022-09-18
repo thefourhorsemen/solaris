@@ -1,11 +1,11 @@
 import React from "react";
-import {NetEnergy} from "./NetEnergy";
+import {NetEnergy} from "../common/NetEnergy";
 
-interface NetEnergyListProps {
+interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
-const NetEnergiesTable = ({energies}: NetEnergyListProps) => {
+const NetEnergiesTable = ({energies}: NetEnergiesProps) => {
   const rows = energies.map((energy) => (
       <tr>
         <td>{energy.date.toString()}</td>

@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import {NetEnergy} from "./energies/NetEnergy";
-import NetEnergiesTable from "./energies/NetEnergiesTable";
-import InputNetEnergiesFile from "./energies/InputNetEnergiesFile";
-import NetEnergiesChart from "./energies/NetEnergiesChart";
+import {NetEnergy} from "./energies/common/NetEnergy";
+import EnergiesSelect from "./energies/selection/EnergiesSelect";
+import EnergiesDisplay from "./energies/presentation/EnergiesDisplay";
 
 function App() {
   const initialState: NetEnergy[] = []
@@ -13,9 +12,8 @@ function App() {
       <div className="App">
         <div className="container">
           <div className="inner">
-            <InputNetEnergiesFile setEnergies={setNetEnergies}/>
-            <NetEnergiesChart energies={netEnergies}/>
-            <NetEnergiesTable energies={netEnergies}/>
+            <EnergiesSelect setEnergies={setNetEnergies}/>
+            <EnergiesDisplay energies={netEnergies}/>
           </div>
         </div>
       </div>

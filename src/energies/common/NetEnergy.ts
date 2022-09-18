@@ -25,6 +25,10 @@ export class NetEnergy {
   }
 
   to(): [Date, number, number, number, number] {
-    return [this.date, this.production, -this.consumption, this.exported, -this.imported]
+    return [this.date, this.production, -this.consumption, -this.exported, this.imported]
+  }
+
+  toDaily(): [string, number] {
+    return [this.date.getHours() + ":" + this.date.getMinutes(), this.production]
   }
 }

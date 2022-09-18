@@ -1,14 +1,14 @@
 import React from "react";
-import {NetEnergy} from "./NetEnergy";
+import {NetEnergy} from "../common/NetEnergy";
 import {Chart} from "react-google-charts";
 
-interface NetEnergyListProps {
+interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
-const NetEnergiesChart = ({energies}: NetEnergyListProps) => {
-  const data = [["Time", "Production", "Consumption", "Exported", "Imported"]]
-  const rows = energies.map((it: NetEnergy) => it.to())
+const NetEnergiesDailyChart = ({energies}: NetEnergiesProps) => {
+  const data = [["Time", "Production"]]
+  const rows = energies.map((it: NetEnergy) => it.toDaily())
 
   // @ts-ignore
   rows.forEach((it: []) => data.push(it))
@@ -19,7 +19,8 @@ const NetEnergiesChart = ({energies}: NetEnergyListProps) => {
     title: "Solar panel tracking",
     vAxis: {title: "Wh"},
     hAxis: {title: "Time"},
-    seriesType: "bars"
+    seriesType: "bars",
+    bar: {groupWidth: "100%"}
   };
 
   return (
@@ -33,4 +34,4 @@ const NetEnergiesChart = ({energies}: NetEnergyListProps) => {
   )
 }
 
-export default NetEnergiesChart
+export default NetEnergiesDailyChart

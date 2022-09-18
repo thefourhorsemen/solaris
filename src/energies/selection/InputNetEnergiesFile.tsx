@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from "react";
-import {readNetEnergy} from "./readNetEnergy";
+import {readNetEnergy} from "../common/readNetEnergy";
 import {IoFolderOpenOutline} from "react-icons/all";
-import {NetEnergy} from "./NetEnergy";
+import {NetEnergy} from "../common/NetEnergy";
 
-interface InputNetEnergiesFileProps {
+interface SetNetEnergiesProps {
   setEnergies: (energies: NetEnergy[]) => void
 }
 
-const InputNetEnergiesFile = ({setEnergies}: InputNetEnergiesFileProps) => {
+const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()

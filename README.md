@@ -62,6 +62,12 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## TO DO
 
-Zoom function on histogram
-Computation of autoproduction and auto consumption
-Sum of all indicators on all data
+Features:
+
+* Zoom function on histogram
+* Computation of autoproduction and auto consumption
+* Sum of all indicators on all data
+
+Deployment on GitHub:
+
+* Follow https://github.com/gitname/react-gh-pages
