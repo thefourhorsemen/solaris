@@ -6,7 +6,7 @@ import EnergiesDisplay from "./energies/presentation/EnergiesDisplay";
 
 function App() {
   const initialState: NetEnergy[] = []
-  const [netEnergies, setNetEnergies] = useState(initialState);
+  const [netEnergies, setNetEnergies] = useState(initialState)
 
   return (
       <div className="App">

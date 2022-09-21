@@ -20,7 +20,8 @@ const NetEnergiesChart = ({energies}: NetEnergiesProps) => {
     vAxis: {title: "Wh"},
     hAxis: {title: "Time"},
     seriesType: "bars",
-    isStacked: true
+    isStacked: true,
+    colors: ['blue', 'orange', 'grey', 'grey']
   };
 
   return (

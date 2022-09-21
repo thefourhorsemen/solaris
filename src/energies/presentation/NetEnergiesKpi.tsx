@@ -15,7 +15,9 @@ const NetEnergiesKpi = ({energies}: NetEnergiesProps) => {
   }), {production: 0, consumption: 0, imported: 0, exported: 0})
 
   const autoConsumptionEnergy = result.production - result.exported
+  // the percentage of the home energy consumption filled by PV
   const autoProduction = Math.round(autoConsumptionEnergy / result.consumption * 100)
+  // the percentage of the energy produced by PV that is consumed by home
   const autoConsumption = Math.round(autoConsumptionEnergy / result.production * 100)
 
   return (
