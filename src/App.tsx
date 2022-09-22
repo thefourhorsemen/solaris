@@ -13,9 +13,11 @@ function App() {
 
   const main = <div className="App">
     <div className="container">
-      <div className="inner">
-        <EnergiesSelect setEnergies={setNetEnergies}/>
-      </div>
+      <h1> Track and optimize your solar panels production
+        <div className="inner">
+          <EnergiesSelect setEnergies={setNetEnergies}/>
+        </div>
+      </h1>
     </div>
   </div>
 

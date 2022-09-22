@@ -1,17 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import {NetEnergy} from "../common/NetEnergy";
-import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
-import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
+import NetEnergiesDate from "./NetEnergiesDate";
+import EnergiesDisplayChart from "./EnergiesDisplayChart";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
 const EnergiesDisplay = ({energies}: NetEnergiesProps) => {
+
+  const [currentDate, setCurrentDate] = useState(energies[energies.length - 1].date)
+
   return (
       <>
-        <NetEnergiesKpiChart energies={energies}/>
-        <NetEnergiesDetailChart energies={energies}/>
+        <NetEnergiesDate date={currentDate} setDate={setCurrentDate}/>
+        <EnergiesDisplayChart date={currentDate} energies={energies}/>
       </>
   )
 }

@@ -64,10 +64,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 Features:
 
-* Zoom function on histogram
-* Computation of autoproduction and auto consumption
-* Sum of all indicators on all data
-
-Deployment on GitHub:
-
-* Follow https://github.com/gitname/react-gh-pages
+* Manages internationalization
+* Add a date picker to select a date to filter data
+    * https://betterprogramming.pub/create-a-custom-date-picker-with-react-and-typescript-from-scratch-25d44dc0b76d
+    * https://github.com/wojtekmaj/react-calendar
+    * https://github.com/Kiarash-Z/react-modern-calendar-datepicker
+    * https://blog.bitsrc.io/13-react-time-and-date-pickers-for-2020-d52d88d1ca0b
+    * https://github.com/carbon-design-system/carbon
+    * https://storybook.js.org/tutorials/design-systems-for-developers/react/en/introduction/
+* Deployment on GitHub:
+    * Follow https://github.com/gitname/react-gh-pages

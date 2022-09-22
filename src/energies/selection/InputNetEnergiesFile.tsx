@@ -30,8 +30,7 @@ const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
   return (
       <>
         <div className="file-input">
-          <label htmlFor="file-input"><IoFolderOpenOutline/> Select the csv file ...
-          </label>
+          <label htmlFor="file-input"><IoFolderOpenOutline size="100px"/></label>
           <input id="file-input" type="file" onChange={changeHandler}/>
         </div>
       </>
