@@ -6,14 +6,12 @@ interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
-const NetEnergiesChart = ({energies}: NetEnergiesProps) => {
+const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
   const data = [["Time", "Production", "Consumption", "Exported", "Imported"]]
   const rows = energies.map((it: NetEnergy) => it.to())
 
   // @ts-ignore
   rows.forEach((it: []) => data.push(it))
-
-  console.log(data)
 
   const options = {
     title: "Solar panel tracking",
@@ -28,11 +26,11 @@ const NetEnergiesChart = ({energies}: NetEnergiesProps) => {
       <Chart
           chartType="ComboChart"
           width="100%"
-          height="800px"
+          height="700px"
           data={data}
           options={options}
       />
   )
 }
 
-export default NetEnergiesChart
+export default NetEnergiesDetailChart

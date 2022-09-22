@@ -1,7 +1,7 @@
 import React from "react";
 import {NetEnergy} from "../common/NetEnergy";
-import NetEnergiesChart from "./NetEnergiesChart";
-import NetEnergiesKpi from "./NetEnergiesKpi";
+import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
+import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
@@ -10,8 +10,8 @@ interface NetEnergiesProps {
 const EnergiesDisplay = ({energies}: NetEnergiesProps) => {
   return (
       <>
-        <NetEnergiesKpi energies={energies}/>
-        <NetEnergiesChart energies={energies}/>
+        <NetEnergiesKpiChart energies={energies}/>
+        <NetEnergiesDetailChart energies={energies}/>
       </>
   )
 }
