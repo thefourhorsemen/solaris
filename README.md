@@ -59,3 +59,15 @@ the [Create React App documentation](https://facebook.github.io/create-react-app
 .
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## TO DO
+
+Features:
+
+* Zoom function on histogram
+* Computation of autoproduction and auto consumption
+* Sum of all indicators on all data
+
+Deployment on GitHub:
+
+* Follow https://github.com/gitname/react-gh-pages

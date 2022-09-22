@@ -1,42 +1,42 @@
-import React, {ChangeEvent, useState} from 'react';
-import './App.css';
-import {IoFolderOpenOutline} from "react-icons/all";
-import {readNetEnergy} from "./energies/readNetEnergy";
-import {NetEnergy} from "./energies/NetEnergy";
-import NetEnergiesTable from "./energies/NetEnergiesTable";
+import React, {useState} from 'react'
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import './App.css'
+import {NetEnergy} from "./energies/common/NetEnergy"
+import EnergiesSelect from "./energies/selection/EnergiesSelect"
+import About from "./About";
+import NoMatch from "./NoMatch";
+import EnergiesDisplay from "./energies/presentation/EnergiesDisplay";
 
 function App() {
-  // data state variable defaulted to an empty array
   const initialState: NetEnergy[] = []
-  const [netEnergies, setNetEnergies] = useState(initialState);
+  const [netEnergies, setNetEnergies] = useState(initialState)
 
-  function changeHandler(event: ChangeEvent<HTMLInputElement>) {
-    event.preventDefault()
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      // @ts-ignore
-      const content = e.target.result
-      // @ts-ignore
-      const energies = readNetEnergy(content)
-      setNetEnergies(energies)
-    }
-    // @ts-ignore
-    reader.readAsText(event.target.files[0])
-  }
+  const main = <div className="App">
+    <div className="container">
+      <div className="inner">
+        <EnergiesSelect setEnergies={setNetEnergies}/>
+      </div>
+    </div>
+  </div>
+
+  const histogram = <div className="App">
+    <div className="container">
+      <div className="inner">
+        <EnergiesDisplay energies={netEnergies}/>
+      </div>
+    </div>
+  </div>
 
   return (
-      <div className="App">
-        <div className="file-input">
-          <label htmlFor="file-input"><IoFolderOpenOutline/> Select the csv file ...
-          </label>
-          <input id="file-input" type="file" onChange={changeHandler}/>
-        </div>
-
-        <div className="container">
-          <NetEnergiesTable energies={netEnergies}/>
-        </div>
-      </div>
-  );
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={main}/>
+          <Route path="/display" element={histogram}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="*" element={<NoMatch/>}/>
+        </Routes>
+      </BrowserRouter>
+  )
 }
 
 export default App;

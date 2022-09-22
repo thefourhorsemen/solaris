@@ -7,6 +7,14 @@ export class NetEnergy {
   exported: number
   imported: number
 
+  constructor(date: Date, production: number, consumption: number, exported: number, imported: number) {
+    this.date = date
+    this.production = production
+    this.consumption = consumption
+    this.exported = exported
+    this.imported = imported
+  }
+
   static of(row: string[]): NetEnergy {
     const date = DateTime.fromFormat(row[0], 'yyyy-MM-dd hh:mm:ss ZZZ').toJSDate()
     const production = parseInt(row[1])
@@ -16,11 +24,11 @@ export class NetEnergy {
     return new NetEnergy(date, production, consumption, exported, imported)
   }
 
-  private constructor(date: Date, production: number, consumption: number, exported: number, imported: number) {
-    this.date = date
-    this.production = production
-    this.consumption = consumption
-    this.exported = exported
-    this.imported = imported
+  to(): [Date, number, number, number, number] {
+    return [this.date, this.production, -this.consumption, -this.exported, this.imported]
+  }
+
+  toDaily(): [string, number] {
+    return [this.date.getHours() + ":" + this.date.getMinutes(), this.production]
   }
 }
