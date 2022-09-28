@@ -13,18 +13,20 @@ const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      // @ts-ignore
-      const content = e.target.result
-      // @ts-ignore
-      const energies = readNetEnergy(content)
-      setEnergies(energies)
 
-      navigate('/display')
+    const reader = new FileReader()
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      if (e.target && e.target.result) {
+        const content = e.target.result
+        const energies = readNetEnergy(content)
+        setEnergies(energies)
+        navigate('/display')
+      }
     }
-    // @ts-ignore
-    reader.readAsText(event.target.files[0])
+
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsText(event.target.files[0])
+    }
   }
 
   return (
