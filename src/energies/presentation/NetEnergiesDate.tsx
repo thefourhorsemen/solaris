@@ -1,4 +1,9 @@
 import React from "react";
+import ButtonGroup from "../../component/ButtonGroup";
+import {IoChevronBackOutline, IoChevronForwardOutline} from "react-icons/all";
+import "./presentation.css"
+
+const DATE_SELECTIONS = ["Day", "Week", "Month", "Year"];
 
 interface NetEnergiesDateProps {
   date: Date,
@@ -22,18 +27,17 @@ const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
     setDate(newDate)
   }
 
+  const onDateButtonChanges = (id: number) => {
+    console.log(DATE_SELECTIONS[id])
+  }
+
   return (
       <>
+        <ButtonGroup buttons={DATE_SELECTIONS} selectButton={onDateButtonChanges}/>
         <div>
-          <button>Day</button>
-          <button>Week</button>
-          <button>Month</button>
-          <button>Year</button>
-        </div>
-        <div>
-          <button onClick={previous}>Previous</button>
+          <button onClick={previous}><IoChevronBackOutline size="20px"/></button>
           <label> {day(date)} </label>
-          <button onClick={next}>Next</button>
+          <button onClick={next}><IoChevronForwardOutline size="20px"/></button>
         </div>
       </>
   )
