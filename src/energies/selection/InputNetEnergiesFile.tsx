@@ -11,10 +11,11 @@ interface SetNetEnergiesProps {
 const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
   let navigate = useNavigate();
 
-  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
 
-    const reader = new FileReader()
+    // FIXME handle several files in input
+    const reader = new FileReader
     reader.onload = (e: ProgressEvent<FileReader>) => {
       if (e.target && e.target.result) {
         const content = e.target.result
@@ -33,7 +34,7 @@ const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
       <>
         <div className="file-input">
           <label htmlFor="file-input"><IoFolderOpenOutline size="100px"/></label>
-          <input id="file-input" type="file" onChange={changeHandler}/>
+          <input id="file-input" type="file" onInput={inputHandler} multiple={true}/>
         </div>
       </>
   )

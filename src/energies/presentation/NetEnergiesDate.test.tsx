@@ -2,10 +2,11 @@ import React from "react";
 import {render} from "@testing-library/react";
 import NetEnergiesDate from "./NetEnergiesDate";
 import userEvent from "@testing-library/user-event";
+import {DateRange, DateSelection} from "../common/DateSelection";
 
 test('display the specified date', () => {
-  let date = new Date("2011-10-10T14:48:00")
-  const setDate = (newDate: Date) => {
+  let date = new DateSelection(DateRange.Day, new Date("2011-10-10T14:48:00"))
+  const setDate = (newDate: DateSelection) => {
     date = newDate
   }
   const component = render(<NetEnergiesDate date={date} setDate={setDate}/>)
@@ -13,8 +14,8 @@ test('display the specified date', () => {
 })
 
 test('set the next day after click on next', () => {
-  let date = new Date("2011-10-10T14:48:00")
-  const setDate = (newDate: Date) => {
+  let date = new DateSelection(DateRange.Day, new Date("2011-10-10T14:48:00"))
+  const setDate = (newDate: DateSelection) => {
     date = newDate
   }
   const component = render(<NetEnergiesDate date={date} setDate={setDate}/>)
@@ -23,8 +24,8 @@ test('set the next day after click on next', () => {
 })
 
 test('set the previous day after click on previous', () => {
-  let date = new Date("2011-10-10T14:48:00")
-  const setDate = (newDate: Date) => {
+  let date = new DateSelection(DateRange.Day, new Date("2011-10-10T14:48:00"))
+  const setDate = (newDate: DateSelection) => {
     date = newDate
   }
   const component = render(<NetEnergiesDate date={date} setDate={setDate}/>)
