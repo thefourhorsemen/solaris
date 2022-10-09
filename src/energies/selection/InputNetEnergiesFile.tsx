@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
-import {readNetEnergy} from "../common/readNetEnergy";
 import {IoFolderOpenOutline} from "react-icons/all";
 import {NetEnergy} from "../common/NetEnergy";
 import {useNavigate} from "react-router-dom";
+import {readNetEnergy} from "../common/readNetEnergy";
 
 interface SetNetEnergiesProps {
   setEnergies: (energies: NetEnergy[]) => void
@@ -11,23 +11,27 @@ interface SetNetEnergiesProps {
 const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
   let navigate = useNavigate();
 
-  const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
 
-    // FIXME handle several files in input
-    const reader = new FileReader
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      if (e.target && e.target.result) {
-        const content = e.target.result
-        const energies = readNetEnergy(content)
-        setEnergies(energies)
-        navigate('/display')
-      }
-    }
+    const files = Array.from(event.target.files || []).map(file => {
+      // Define a new file reader
+      const reader = new FileReader()
+      // Create a new promise
+      return new Promise(resolve => {
+        // Resolve the promise after reading file
+        reader.onload = () => resolve(reader.result)
+        // Read the file as a text
+        reader.readAsText(file)
+      });
+    });
 
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsText(event.target.files[0])
-    }
+    // At this point you'll have an array of results
+    const contents = await Promise.all(files);
+    // @ts-ignore
+    const energies = contents.map(content => readNetEnergy(content)).reduce((a, b) => a.concat(b))
+    setEnergies(energies)
+    navigate('/display')
   }
 
   return (

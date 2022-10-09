@@ -1,7 +1,7 @@
 import {DateTime} from "luxon"
 
 export class NetEnergy {
-  date: Date // FIXME use milliseconds from EPOCH
+  date: Date
   production: number
   consumption: number
   exported: number
