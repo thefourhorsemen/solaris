@@ -17,6 +17,7 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
     title: "Solar panel tracking",
     vAxis: {title: "Wh"},
     hAxis: {title: "Time"},
+    legend: {position: 'bottom'},
     seriesType: "bars",
     isStacked: true,
     colors: ['blue', 'orange', 'grey', 'grey']
@@ -25,7 +26,7 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
   return (
       <Chart
           chartType="ComboChart"
-          width="100%"
+          width="90%"
           height="650px"
           data={data}
           options={options}

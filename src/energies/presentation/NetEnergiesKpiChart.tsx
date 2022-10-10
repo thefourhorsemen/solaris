@@ -9,9 +9,10 @@ interface NetEnergiesProps {
 const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
   const result = energies.reduce((acc, val) => ({
     production: acc.production + val.production,
+    consumption: acc.consumption + val.consumption,
     exported: acc.exported + val.exported,
     imported: acc.imported + val.imported
-  }), {production: 0, exported: 0, imported: 0})
+  }), {production: 0, consumption: 0, exported: 0, imported: 0})
 
   const autoConsumptionEnergy = result.production - result.exported
 
@@ -32,7 +33,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
   };
 
   return (
-      <div className='rowC'>
+      <div>
         <Chart
             chartType="PieChart"
             width="100%"

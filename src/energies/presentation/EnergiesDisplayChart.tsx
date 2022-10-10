@@ -34,10 +34,10 @@ const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
     return (<></>)
   }
   return (
-      <>
+      <div className='rowC'>
         <NetEnergiesDetailChart energies={selectedEnergies}/>
         <NetEnergiesKpiChart energies={selectedEnergies}/>
-      </>
+      </div>
   )
 }
 
