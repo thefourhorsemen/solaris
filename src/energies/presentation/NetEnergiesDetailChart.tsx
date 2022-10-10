@@ -20,13 +20,13 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
     legend: {position: 'bottom'},
     seriesType: "bars",
     isStacked: true,
-    colors: ['blue', 'orange', 'grey', 'grey']
+    colors: ['blue', 'orange', 'grey', "#424242"]
   };
 
   return (
       <Chart
           chartType="ComboChart"
-          width="90%"
+          width="100%"
           height="650px"
           data={data}
           options={options}

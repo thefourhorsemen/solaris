@@ -4,6 +4,7 @@ import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
 import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
 import {DateSelection} from "../common/DateSelection";
 import {groupBy, transformMap} from "../common/Util";
+import {MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
 
 interface NetEnergiesProps {
   date: DateSelection,
@@ -34,11 +35,16 @@ const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
     return (<></>)
   }
   return (
-      <div className='rowC'>
-        <NetEnergiesDetailChart energies={selectedEnergies}/>
-        <NetEnergiesKpiChart energies={selectedEnergies}/>
-      </div>
-  )
+      <MDBContainer>
+        <MDBRow>
+          <MDBCol md={8} center>
+            <NetEnergiesDetailChart energies={selectedEnergies}/>
+          </MDBCol>
+          <MDBCol md={4} center>
+            <NetEnergiesKpiChart energies={selectedEnergies}/>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>)
 }
 
 export default EnergiesDisplayChart

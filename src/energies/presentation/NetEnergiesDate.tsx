@@ -1,8 +1,8 @@
 import React from "react";
-import ButtonGroup from "../../component/ButtonGroup";
 import {IoChevronBackOutline, IoChevronForwardOutline} from "react-icons/all";
 import "./presentation.css"
 import {DateRange, DateSelection} from "../common/DateSelection";
+import {MDBBtn, MDBBtnGroup, MDBCol, MDBContainer, MDBRow} from "mdb-react-ui-kit";
 
 const DATE_SELECTIONS = Object.keys(DateRange).filter((v) => isNaN(Number(v)))
 const DATE_RANGES = [DateRange.Day, DateRange.Week, DateRange.Month, DateRange.Year]
@@ -26,14 +26,25 @@ const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
   }
 
   return (
-      <>
-        <ButtonGroup buttons={DATE_SELECTIONS} selectButton={onDateButtonChanges}/>
-        <div>
-          <button onClick={previous}><IoChevronBackOutline size="20px"/></button>
+      <MDBContainer>
+        <MDBCol>
+          <MDBBtn color='light' onClick={previous}><IoChevronBackOutline/></MDBBtn>
+          <MDBBtnGroup>
+            {DATE_SELECTIONS.map((buttonLabel, i) => (
+                <MDBBtn color='info'
+                        key={i}
+                        name={buttonLabel}
+                        onClick={() => onDateButtonChanges(i)}>
+                  {buttonLabel}
+                </MDBBtn>
+            ))}
+          </MDBBtnGroup>
+          <MDBBtn color='light' onClick={next}><IoChevronForwardOutline/></MDBBtn>
+        </MDBCol>
+        <MDBRow>
           <label> {date.toString()} </label>
-          <button onClick={next}><IoChevronForwardOutline size="20px"/></button>
-        </div>
-      </>
+        </MDBRow>
+      </MDBContainer>
   )
 }
 
