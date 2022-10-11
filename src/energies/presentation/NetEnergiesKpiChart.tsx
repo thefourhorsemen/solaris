@@ -1,7 +1,7 @@
 import React from "react";
 import {NetEnergy} from "../common/NetEnergy";
 import {Chart} from "react-google-charts";
-import {MDBContainer, MDBTable, MDBTableBody} from "mdb-react-ui-kit";
+import {Container, Table} from "react-bootstrap";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
@@ -34,7 +34,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
   };
 
   return (
-      <MDBContainer>
+      <Container>
         <Chart
             chartType="PieChart"
             options={prodOptions}
@@ -45,31 +45,31 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
             options={consOptions}
             data={consData}
         />
-        <MDBTable borderless small>
-          <MDBTableBody>
-            <tr>
-              <td align='left'>Production</td>
-              <td align='right'>{Math.round(result.production).toFixed(1)}</td>
-              <td align='left'>kWh</td>
-            </tr>
-            <tr>
-              <td align='left'>Consumption</td>
-              <td align='right'>{Math.round(result.consumption).toFixed(1)}</td>
-              <td align='left'>kWh</td>
-            </tr>
-            <tr>
-              <td align='left'>Exported</td>
-              <td align='right'>{Math.round(result.exported).toFixed(1)}</td>
-              <td align='left'>kWh</td>
-            </tr>
-            <tr>
-              <td align='left'>Imported</td>
-              <td align='right'>{Math.round(result.imported).toFixed(1)}</td>
-              <td align='left'>kWh</td>
-            </tr>
-          </MDBTableBody>
-        </MDBTable>
-      </MDBContainer>
+        <Table borderless>
+          <tbody>
+          <tr>
+            <td align='left'>Production</td>
+            <td align='right'>{Math.round(result.production).toFixed(1)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Consumption</td>
+            <td align='right'>{Math.round(result.consumption).toFixed(1)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Exported</td>
+            <td align='right'>{Math.round(result.exported).toFixed(1)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Imported</td>
+            <td align='right'>{Math.round(result.imported).toFixed(1)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          </tbody>
+        </Table>
+      </Container>
   )
 }
 
