@@ -11,22 +11,26 @@ interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
-// TODO refactor it
-const selectEnergies = (date: DateSelection, energies: NetEnergy[]): NetEnergy[] => {
-  const netEnergies = energies.filter(energy => date.match(energy.date)) || []
-
+const groupByDate = (netEnergies: NetEnergy[], date: DateSelection) => {
   const grouped = groupBy(netEnergies, energy => {
-    const grouper = date.grouper()
-    return grouper(energy.date)
+    return date.grouper()(energy.date)
   })
+  const result = new Map<Date, NetEnergy[]>()
+  grouped.forEach((v, k) => result.set(new Date(k), v))
+  return result;
+}
 
-  const reduction = (s: number[], v: NetEnergy) => [s[0] + v.production, s[1] + v.consumption, s[2] + v.exported, s[3] + v.imported]
-  const init = [0, 0, 0, 0]
-  const consolidated = transformMap(grouped, values => values.reduce(reduction, init))
-
+const sum = (grouped: Map<Date, NetEnergy[]>) => {
+  const reduced = transformMap(grouped, values => NetEnergy.sumEnergies(values))
   const result: NetEnergy[] = []
-  consolidated.forEach((v, k) => result.push(new NetEnergy(new Date(k), v[0], v[1], v[2], v[3])))
+  reduced.forEach((v, k) => result.push(NetEnergy.from(k, v)))
   return result
+}
+
+const selectEnergies = (date: DateSelection, energies: NetEnergy[]): NetEnergy[] => {
+  const filtered = energies.filter(energy => date.match(energy.date))
+  const grouped = groupByDate(filtered, date);
+  return sum(grouped)
 }
 
 const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
