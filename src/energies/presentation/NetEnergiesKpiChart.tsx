@@ -1,7 +1,7 @@
 import React from "react";
 import {NetEnergy} from "../common/NetEnergy";
 import {Chart} from "react-google-charts";
-import {Container, Table} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
@@ -34,7 +34,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
   }
 
   return (
-      <Container>
+      <>
         <Chart
             chartType="PieChart"
             options={prodOptions}
@@ -69,7 +69,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
           </tr>
           </tbody>
         </Table>
-      </Container>
+      </>
   )
 }
 

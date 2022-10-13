@@ -1,8 +1,13 @@
 import React from "react";
-import {IoChevronBackOutline, IoChevronForwardOutline} from "react-icons/all";
+import {
+  IoBarChartOutline,
+  IoChevronBackOutline,
+  IoChevronForwardOutline,
+  IoGridOutline
+} from "react-icons/all";
 import "./presentation.css"
 import {DateRange, DateSelection} from "../common/DateSelection";
-import {Button, ButtonGroup, Col, Container, Row} from "react-bootstrap";
+import {Button, ButtonGroup, ButtonToolbar, Col, Row} from "react-bootstrap";
 
 const DATE_SELECTIONS = Object.keys(DateRange).filter((v) => isNaN(Number(v)))
 const DATE_RANGES = [DateRange.Day, DateRange.Week, DateRange.Month, DateRange.Year]
@@ -21,30 +26,43 @@ const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
     setDate(date.next())
   }
 
-  const onDateButtonChanges = (id: number) => {
-    setDate(date.mutate(DATE_RANGES[id]))
+  const onDateButtonChanges = (val: number) => {
+    setDate(date.mutate(DATE_RANGES[val]))
+  }
+
+  const onChartButtonChanges = (val: number) => {
   }
 
   return (
-      <Container>
-        <Col>
-          <Button variant="outline-dark" onClick={previous}><IoChevronBackOutline/></Button>
+      <>
+        <ButtonToolbar className='justify-content-between'>
           <ButtonGroup>
             {DATE_SELECTIONS.map((buttonLabel, i) => (
                 <Button color='info'
                         key={i}
-                        name={buttonLabel}
                         onClick={() => onDateButtonChanges(i)}>
                   {buttonLabel}
                 </Button>
             ))}
           </ButtonGroup>
-          <Button variant="outline-dark" onClick={next}><IoChevronForwardOutline/></Button>
-        </Col>
+          <ButtonGroup>
+            <Button color='info'
+                    key={0}
+                    onClick={() => onChartButtonChanges(0)}><IoBarChartOutline/>
+            </Button>
+            <Button color='info'
+                    key={1}
+                    onClick={() => onChartButtonChanges(1)}><IoGridOutline/></Button>
+          </ButtonGroup>
+        </ButtonToolbar>
         <Row>
-          <label> {date.toString()} </label>
+          <Col>
+            <Button variant="outline-dark" onClick={previous}><IoChevronBackOutline/></Button>
+            <label> {date.toString()} </label>
+            <Button variant="outline-dark" onClick={next}><IoChevronForwardOutline/></Button>
+          </Col>
         </Row>
-      </Container>
+      </>
   )
 }
 

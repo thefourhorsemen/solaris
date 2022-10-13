@@ -4,7 +4,7 @@ import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
 import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
 import {DateSelection} from "../common/DateSelection";
 import {groupBy, transformMap} from "../common/Util";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 
 interface NetEnergiesProps {
   date: DateSelection,
@@ -39,7 +39,7 @@ const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
     return (<></>)
   }
   return (
-      <Container>
+      <>
         <Row>
           <Col md={8} center>
             <NetEnergiesDetailChart energies={selectedEnergies}/>
@@ -48,7 +48,7 @@ const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
             <NetEnergiesKpiChart energies={selectedEnergies}/>
           </Col>
         </Row>
-      </Container>)
+      </>)
 }
 
 export default EnergiesDisplayChart

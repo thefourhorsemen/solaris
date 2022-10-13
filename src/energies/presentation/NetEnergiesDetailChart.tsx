@@ -27,7 +27,7 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
       <Chart
           chartType="ComboChart"
           width="100%"
-          height="650px"
+          height="100%"
           data={data}
           options={options}
       />
