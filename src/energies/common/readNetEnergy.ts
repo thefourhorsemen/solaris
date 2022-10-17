@@ -2,7 +2,7 @@
 import {parse} from "papaparse"
 import {NetEnergy} from "./NetEnergy";
 
-export const readNetEnergy = (content: string): NetEnergy[] => {
+export const readNetEnergy = (content: string | ArrayBuffer): NetEnergy[] => {
   const data = parse(content)
   const rows = data.data
   rows.shift()

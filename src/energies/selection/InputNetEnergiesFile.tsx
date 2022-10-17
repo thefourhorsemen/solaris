@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
-import {readNetEnergy} from "../common/readNetEnergy";
 import {IoFolderOpenOutline} from "react-icons/all";
 import {NetEnergy} from "../common/NetEnergy";
 import {useNavigate} from "react-router-dom";
+import {readNetEnergy} from "../common/readNetEnergy";
 
 interface SetNetEnergiesProps {
   setEnergies: (energies: NetEnergy[]) => void
@@ -11,28 +11,34 @@ interface SetNetEnergiesProps {
 const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
   let navigate = useNavigate();
 
-  const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const inputHandler = async (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      // @ts-ignore
-      const content = e.target.result
-      // @ts-ignore
-      const energies = readNetEnergy(content)
-      setEnergies(energies)
 
-      navigate('/display')
-    }
+    const files = Array.from(event.target.files || []).map(file => {
+      // Define a new file reader
+      const reader = new FileReader()
+      // Create a new promise
+      return new Promise(resolve => {
+        // Resolve the promise after reading file
+        reader.onload = () => resolve(reader.result)
+        // Read the file as a text
+        reader.readAsText(file)
+      });
+    });
+
+    // At this point you'll have an array of results
+    const contents = await Promise.all(files);
     // @ts-ignore
-    reader.readAsText(event.target.files[0])
+    const energies = contents.map(content => readNetEnergy(content)).reduce((a, b) => a.concat(b))
+    setEnergies(energies)
+    navigate('/display')
   }
 
   return (
       <>
         <div className="file-input">
-          <label htmlFor="file-input"><IoFolderOpenOutline/> Select the csv file ...
-          </label>
-          <input id="file-input" type="file" onChange={changeHandler}/>
+          <label htmlFor="file-input"><IoFolderOpenOutline size="100px"/></label>
+          <input id="file-input" type="file" onInput={inputHandler} multiple={true}/>
         </div>
       </>
   )

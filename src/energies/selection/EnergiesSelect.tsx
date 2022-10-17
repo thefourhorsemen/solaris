@@ -8,9 +8,7 @@ interface SetNetEnergiesProps {
 
 const EnergiesSelect = ({setEnergies}: SetNetEnergiesProps) => {
   return (
-      <>
-        <InputNetEnergiesFile setEnergies={setEnergies}/>
-      </>
+      <InputNetEnergiesFile setEnergies={setEnergies}/>
   )
 }
 

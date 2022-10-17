@@ -1,24 +1,21 @@
 import React from "react";
 import {NetEnergy} from "../common/NetEnergy";
 import {Chart} from "react-google-charts";
+import {Table} from "react-bootstrap";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
 const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
-  const result = energies.reduce((acc, val) => ({
-    production: acc.production + val.production,
-    exported: acc.exported + val.exported,
-    imported: acc.imported + val.imported
-  }), {production: 0, exported: 0, imported: 0})
+  const result = NetEnergy.sumEnergies(energies)
 
   const autoConsumptionEnergy = result.production - result.exported
 
   const prodData = [["Energy", "kWh"], ["Locally consumed", autoConsumptionEnergy], ["Exported", result.exported]]
   const prodOptions = {
     title: "Production",
-    pieHole: 0.4,
+    pieHole: 0.25,
     is3D: false,
     colors: ['green', 'grey']
   };
@@ -26,28 +23,53 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
   const consData = [["Energy", "kWh"], ["Locally consumed", autoConsumptionEnergy], ["Imported", result.imported]]
   const consOptions = {
     title: "Consumption",
-    pieHole: 0.4,
+    pieHole: 0.25,
     is3D: false,
     colors: ['green', 'grey']
   };
 
+  const round = (value: number) => {
+    const mile = value / 1000
+    return mile.toFixed(1)
+  }
+
   return (
-      <div className='rowC'>
+      <>
         <Chart
             chartType="PieChart"
-            width="100%"
-            height="300px"
             options={prodOptions}
             data={prodData}
         />
         <Chart
             chartType="PieChart"
-            width="100%"
-            height="300px"
             options={consOptions}
             data={consData}
         />
-      </div>
+        <Table borderless>
+          <tbody>
+          <tr>
+            <td align='left'>Production</td>
+            <td align='right'>{round(result.production)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Consumption</td>
+            <td align='right'>{round(result.consumption)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Exported</td>
+            <td align='right'>{round(result.exported)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          <tr>
+            <td align='left'>Imported</td>
+            <td align='right'>{round(result.imported)}</td>
+            <td align='left'>kWh</td>
+          </tr>
+          </tbody>
+        </Table>
+      </>
   )
 }
 

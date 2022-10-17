@@ -24,6 +24,19 @@ export class NetEnergy {
     return new NetEnergy(date, production, consumption, exported, imported)
   }
 
+  static from(date: Date, obj: { production: number, consumption: number, exported: number, imported: number }): NetEnergy {
+    return new NetEnergy(date, obj.production, obj.consumption, obj.exported, obj.imported)
+  }
+
+  static sumEnergies(energies: NetEnergy[]) {
+    return energies.reduce((acc, val) => ({
+      production: acc.production + val.production,
+      consumption: acc.consumption + val.consumption,
+      exported: acc.exported + val.exported,
+      imported: acc.imported + val.imported
+    }), {production: 0, consumption: 0, exported: 0, imported: 0})
+  }
+
   to(): [Date, number, number, number, number] {
     return [this.date, this.production, -this.consumption, -this.exported, this.imported]
   }
