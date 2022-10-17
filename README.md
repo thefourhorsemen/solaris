@@ -76,4 +76,3 @@ Features:
     * https://storybook.js.org/tutorials/design-systems-for-developers/react/en/introduction/
 * Deploy on GitHub:
     * Follow https://github.com/gitname/react-gh-pages
-* Test React Bootstrap

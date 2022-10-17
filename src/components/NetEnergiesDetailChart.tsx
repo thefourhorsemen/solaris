@@ -1,5 +1,5 @@
 import React from "react";
-import {NetEnergy} from "../common/NetEnergy";
+import {NetEnergy} from "../models/NetEnergy";
 import {Chart} from "react-google-charts";
 
 interface NetEnergiesProps {
@@ -23,15 +23,13 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
     colors: ['blue', 'orange', 'grey', "#424242"]
   };
 
-  return (
-      <Chart
-          chartType="ComboChart"
-          width="100%"
-          height="100%"
-          data={data}
-          options={options}
-      />
-  )
+  return <Chart
+      chartType="ComboChart"
+      width="100%"
+      height="100%"
+      data={data}
+      options={options}
+  />
 }
 
 export default NetEnergiesDetailChart

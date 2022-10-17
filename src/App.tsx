@@ -1,17 +1,16 @@
-import React, {useState} from 'react'
+import React, {Suspense, useState} from 'react'
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import './App.css'
-import {NetEnergy} from "./energies/common/NetEnergy"
-import EnergiesSelect from "./energies/selection/EnergiesSelect"
-import About from "./About";
-import NoMatch from "./NoMatch";
-import EnergiesDisplay from "./energies/presentation/EnergiesDisplay";
+import {NetEnergy} from "./models/NetEnergy"
 import {Card} from "react-bootstrap";
+import LoadingSpinner from "./components/LoadingSpinner";
+
+const EnergiesSelect = React.lazy(() => import('./components/EnergiesSelect'))
+const EnergiesDisplay = React.lazy(() => import('./components/EnergiesDisplay'))
+const NoMatch = React.lazy(() => import('./NoMatch'))
+const About = React.lazy(() => import('./About'))
 
 function App() {
-  const initialState: NetEnergy[] = []
-  const [netEnergies, setNetEnergies] = useState(initialState)
-
   const decorate = (element: JSX.Element) => {
     return <Card className="text-center">
       <Card.Header>Track and optimize your solar panels production</Card.Header>
@@ -25,14 +24,19 @@ function App() {
     </Card>
   }
 
+  const initialState: NetEnergy[] = []
+  const [netEnergies, setNetEnergies] = useState(initialState)
+
   return (
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={decorate(<EnergiesSelect setEnergies={setNetEnergies}/>)}/>
-          <Route path="/display" element={decorate(<EnergiesDisplay energies={netEnergies}/>)}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="*" element={<NoMatch/>}/>
-        </Routes>
+        <Suspense fallback={<div className='centered'><LoadingSpinner/></div>}>
+          <Routes>
+            <Route path="/" element={decorate(<EnergiesSelect setEnergies={setNetEnergies}/>)}/>
+            <Route path="/display" element={decorate(<EnergiesDisplay energies={netEnergies}/>)}/>
+            <Route path="/about" element={<About/>}/>
+            <Route path="*" element={<NoMatch/>}/>
+          </Routes>
+        </Suspense>
       </BrowserRouter>
   )
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import {NetEnergy} from "../common/NetEnergy";
+import {NetEnergy} from "../models/NetEnergy";
 import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
 import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
-import {DateSelection} from "../common/DateSelection";
-import {groupBy, transformMap} from "../common/Util";
+import {DateSelection} from "../models/DateSelection";
 import {Col, Row} from "react-bootstrap";
+import {groupBy, transformMap} from "../functions/Util";
 
 interface NetEnergiesProps {
   date: DateSelection,
@@ -36,19 +36,19 @@ const selectEnergies = (date: DateSelection, energies: NetEnergy[]): NetEnergy[]
 const EnergiesDisplayChart = ({date, energies}: NetEnergiesProps) => {
   const selectedEnergies = selectEnergies(date, energies)
   if (selectedEnergies.length === 0) {
-    return (<></>)
+    return <div>No data associated to the selected date</div>
   }
-  return (
-      <>
-        <Row>
-          <Col md={8} center>
-            <NetEnergiesDetailChart energies={selectedEnergies}/>
-          </Col>
-          <Col md={4} center>
-            <NetEnergiesKpiChart energies={selectedEnergies}/>
-          </Col>
-        </Row>
-      </>)
+
+  return <>
+    <Row>
+      <Col md={8} center>
+        <NetEnergiesDetailChart energies={selectedEnergies}/>
+      </Col>
+      <Col md={4} center>
+        <NetEnergiesKpiChart energies={selectedEnergies}/>
+      </Col>
+    </Row>
+  </>
 }
 
 export default EnergiesDisplayChart

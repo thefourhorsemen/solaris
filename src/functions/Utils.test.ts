@@ -1,5 +1,5 @@
-import {NetEnergy} from "./NetEnergy";
 import {groupBy, transformMap} from "./Util";
+import {NetEnergy} from "../models/NetEnergy";
 
 // TODO
 test('day string', () => {

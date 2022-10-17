@@ -2,7 +2,7 @@ import React from "react";
 import {render} from "@testing-library/react";
 import NetEnergiesDate from "./NetEnergiesDate";
 import userEvent from "@testing-library/user-event";
-import {DateRange, DateSelection} from "../common/DateSelection";
+import {DateRange, DateSelection} from "../models/DateSelection";
 
 test('display the specified date', () => {
   let date = new DateSelection(DateRange.Day, new Date("2011-10-10T14:48:00"))

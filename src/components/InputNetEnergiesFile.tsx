@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
 import {IoFolderOpenOutline} from "react-icons/all";
-import {NetEnergy} from "../common/NetEnergy";
+import {NetEnergy} from "../models/NetEnergy";
 import {useNavigate} from "react-router-dom";
-import {readNetEnergy} from "../common/readNetEnergy";
+import {readNetEnergy} from "../functions/readNetEnergy";
 
 interface SetNetEnergiesProps {
   setEnergies: (energies: NetEnergy[]) => void
@@ -34,14 +34,12 @@ const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {
     navigate('/display')
   }
 
-  return (
-      <>
-        <div className="file-input">
-          <label htmlFor="file-input"><IoFolderOpenOutline size="100px"/></label>
-          <input id="file-input" type="file" onInput={inputHandler} multiple={true}/>
-        </div>
-      </>
-  )
+  return <>
+    <div className="file-input">
+      <label htmlFor="file-input"><IoFolderOpenOutline size="100px"/></label>
+      <input id="file-input" type="file" onInput={inputHandler} multiple={true}/>
+    </div>
+  </>
 }
 
 export default InputNetEnergiesFile
