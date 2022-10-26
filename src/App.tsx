@@ -7,10 +7,10 @@ import LoadingSpinner from "./components/LoadingSpinner";
 
 const EnergiesSelect = React.lazy(() => import('./components/EnergiesSelect'))
 const EnergiesDisplay = React.lazy(() => import('./components/EnergiesDisplay'))
-const NoMatch = React.lazy(() => import('./NoMatch'))
-const About = React.lazy(() => import('./About'))
+const NoMatch = React.lazy(() => import('./components/NoMatch'))
+const About = React.lazy(() => import('./components/About'))
 
-function App() {
+const App = () => {
   const decorate = (element: JSX.Element) => {
     return <Card className="text-center">
       <Card.Header>Track and optimize your solar panels production</Card.Header>
@@ -41,4 +41,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
