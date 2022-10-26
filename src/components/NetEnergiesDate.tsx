@@ -4,7 +4,7 @@ import {
   IoChevronBackOutline,
   IoChevronForwardOutline,
   IoGridOutline
-} from "react-icons/all";
+} from "react-icons/io5";
 import "./presentation.css"
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {Button, ButtonGroup, ButtonToolbar, Col, Row} from "react-bootstrap";
