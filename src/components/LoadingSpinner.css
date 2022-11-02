@@ -7,7 +7,7 @@
   }
 }
 
-.loading-spinner {
+.loading-spinner__display {
   width: 50px;
   height: 50px;
   border: 10px solid #f3f3f3; /* Light grey */
@@ -16,7 +16,7 @@
   animation: spinner 1.5s linear infinite;
 }
 
-.spinner-container {
+.loading-spinner__container {
   display: grid;
   justify-content: center;
   align-items: center;

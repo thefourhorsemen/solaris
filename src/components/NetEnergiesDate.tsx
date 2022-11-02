@@ -5,7 +5,7 @@ import {
   IoChevronForwardOutline,
   IoGridOutline
 } from "react-icons/io5";
-import "./presentation.css"
+import "./NetEnergiesDate.css";
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {Button, ButtonGroup, ButtonToolbar, Col, Row} from "react-bootstrap";
 
@@ -57,7 +57,7 @@ const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
     <Row>
       <Col>
         <Button variant="outline-dark" onClick={previous}><IoChevronBackOutline/></Button>
-        <label> {date.toString()} </label>
+        <label className="net-energies-date__label"> {date.toString()} </label>
         <Button variant="outline-dark" onClick={next}><IoChevronForwardOutline/></Button>
       </Col>
     </Row>
