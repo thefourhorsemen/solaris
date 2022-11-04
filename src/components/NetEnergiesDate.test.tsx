@@ -2,13 +2,20 @@ import React from "react";
 import {render} from "@testing-library/react";
 import NetEnergiesDate from "./NetEnergiesDate";
 import {DateRange, DateSelection} from "../models/DateSelection";
+import {ChartType} from "../models/ChartType";
 
 test('display the specified date', () => {
   let date = new DateSelection(DateRange.Day, new Date("2011-10-10T14:48:00"))
   const setDate = (newDate: DateSelection) => {
     date = newDate
   }
-  const component = render(<NetEnergiesDate date={date} setDate={setDate}/>)
+
+  const setChartType = (chartType: ChartType) => {
+    // nothing to do
+  }
+
+  const component = render(<NetEnergiesDate date={date} setDate={setDate}
+                                            setChartType={setChartType}/>)
   expect(component.queryByText('Mon, Oct 10, 2011')).toBeInTheDocument()
 })
 

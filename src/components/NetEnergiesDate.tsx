@@ -5,19 +5,22 @@ import {
   IoChevronForwardOutline,
   IoGridOutline
 } from "react-icons/io5";
-import "./NetEnergiesDate.css";
-import {DateRange, DateSelection} from "../models/DateSelection";
 import {Button, ButtonGroup, ButtonToolbar, Col, Row} from "react-bootstrap";
+import "./NetEnergiesDate.css";
+import {ChartType} from "../models/ChartType";
+import {DateRange, DateSelection} from "../models/DateSelection";
 
 const DATE_SELECTIONS = Object.keys(DateRange).filter((v) => isNaN(Number(v)))
 const DATE_RANGES = [DateRange.Day, DateRange.Week, DateRange.Month, DateRange.Year]
+const CHART_TYPES = [ChartType.MEASURE, ChartType.AVERAGE]
 
 interface NetEnergiesDateProps {
   date: DateSelection,
-  setDate: (date: DateSelection) => void
+  setDate: (date: DateSelection) => void,
+  setChartType: (type: ChartType) => void
 }
 
-const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
+const NetEnergiesDate = ({date, setDate, setChartType}: NetEnergiesDateProps) => {
   const previous = () => {
     setDate(date.previous())
   }
@@ -31,6 +34,7 @@ const NetEnergiesDate = ({date, setDate}: NetEnergiesDateProps) => {
   }
 
   const onChartButtonChanges = (val: number) => {
+    setChartType(CHART_TYPES[val])
   }
 
   return <>
