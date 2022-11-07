@@ -1,6 +1,6 @@
 // @ts-ignore
 import {parse} from "papaparse"
-import {NetEnergy} from "./NetEnergy";
+import {NetEnergy} from "../models/NetEnergy";
 
 export const readNetEnergy = (content: string | ArrayBuffer): NetEnergy[] => {
   const data = parse(content)
