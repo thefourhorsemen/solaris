@@ -3,17 +3,14 @@ import {NetEnergy} from "../models/NetEnergy";
 import NetEnergiesDate from "./NetEnergiesDate";
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {ChartType} from "../models/ChartType";
-import EnergiesDisplayChart from "./EnergiesDisplayChart";
+import EnergiesChart from "./EnergiesChart";
 
 interface NetEnergiesProps {
   energies: NetEnergy[];
 }
 
 const RenderChart = (chartType: ChartType, currentDate: DateSelection, energies: NetEnergy[]) => {
-  if (chartType === ChartType.MEASURE) {
-    return <EnergiesDisplayChart date={currentDate} energies={energies}/>
-  }
-  return <div>Average view is implemented</div>
+  return <EnergiesChart date={currentDate} energies={energies} chartType={chartType}/>
 }
 
 const RenderAll = (energies: NetEnergy[]) => {
