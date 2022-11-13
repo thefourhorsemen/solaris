@@ -1,5 +1,5 @@
 import React, {Suspense, useState} from 'react'
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom"
 import './App.css'
 import {NetEnergy} from "./models/NetEnergy"
 import {Card} from "react-bootstrap";
@@ -13,14 +13,15 @@ const About = React.lazy(() => import('./components/About'))
 const App = () => {
   const decorate = (element: JSX.Element) => {
     return <Card className="text-center">
-      <Card.Header>Track and optimize your solar panels production</Card.Header>
+      <Card.Header>Track and optimize your solar panels production (<NavLink
+          to="/">home</NavLink>)</Card.Header>
       <Card.Body>{element}</Card.Body>
       <Card.Footer style={{
         position: "fixed",
         left: 0,
         bottom: 0,
         right: 0
-      }}>Solaris copyright @ {new Date().getFullYear()}</Card.Footer>
+      }}>Solaris Copyright @ {new Date().getFullYear()}</Card.Footer>
     </Card>
   }
 
