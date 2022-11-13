@@ -1,5 +1,6 @@
 import dayjs, {OpUnitType} from 'dayjs'
 import {DateTimeFormatOptions} from "luxon";
+import {LocalTime} from "@js-joda/core";
 
 export enum DateRange {
   Day = 1, Week, Month, Year
@@ -67,6 +68,10 @@ export class DateSelection {
       case DateRange.Year:
         return (date: Date) => Date.UTC(date.getFullYear(), date.getMonth())
     }
+  }
+
+  dayGrouper(): (date: Date) => number {
+    return (date: Date) => LocalTime.of(date.getHours(), date.getMinutes(), date.getSeconds(), 0).toSecondOfDay() * 1000
   }
 
   toString(): string {
