@@ -1,19 +1,19 @@
 import React, {useState} from "react";
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy} from "../models/NetEnergy";
 import NetEnergiesDate from "./NetEnergiesDate";
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {ChartType} from "../models/ChartType";
 import EnergiesChart from "./EnergiesChart";
 
 interface NetEnergiesProps {
-  energies: NetEnergy[];
+  energies: DateNetEnergy[];
 }
 
-const RenderChart = (chartType: ChartType, currentDate: DateSelection, energies: NetEnergy[]) => {
+const RenderChart = (chartType: ChartType, currentDate: DateSelection, energies: DateNetEnergy[]) => {
   return <EnergiesChart date={currentDate} energies={energies} chartType={chartType}/>
 }
 
-const RenderAll = (energies: NetEnergy[]) => {
+const RenderAll = (energies: DateNetEnergy[]) => {
   const [currentDate, setCurrentDate] = useState(new DateSelection(DateRange.Day, energies[energies.length - 1].date))
   const [chartType, setChartType] = useState(ChartType.MEASURE)
 

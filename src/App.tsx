@@ -1,9 +1,9 @@
 import React, {Suspense, useState} from 'react'
 import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom"
 import './App.css'
-import {NetEnergy} from "./models/NetEnergy"
 import {Card} from "react-bootstrap";
 import LoadingSpinner from "./components/LoadingSpinner";
+import {DateNetEnergy} from "./models/NetEnergy";
 
 const EnergiesSelect = React.lazy(() => import('./components/EnergiesSelect'))
 const EnergiesDisplay = React.lazy(() => import('./components/EnergiesDisplay'))
@@ -25,7 +25,7 @@ const App = () => {
     </Card>
   }
 
-  const initialState: NetEnergy[] = []
+  const initialState: DateNetEnergy[] = []
   const [netEnergies, setNetEnergies] = useState(initialState)
 
   return (

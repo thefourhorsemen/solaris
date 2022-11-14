@@ -1,9 +1,9 @@
 import React from "react";
 import InputNetEnergiesFile from "./InputNetEnergiesFile";
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy} from "../models/NetEnergy";
 
 interface SetNetEnergiesProps {
-  setEnergies: (energies: NetEnergy[]) => void
+  setEnergies: (energies: DateNetEnergy[]) => void
 }
 
 const EnergiesSelect = ({setEnergies}: SetNetEnergiesProps) => {
