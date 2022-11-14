@@ -20,7 +20,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
     colors: ['green', 'grey']
   };
 
-  const consData = [["Energy", "kWh"], ["Locally consumed", autoConsumptionEnergy], ["Imported", result.imported]]
+  const consData = [["Energy", "kWh"], ["Locally produced", autoConsumptionEnergy], ["Imported", result.imported]]
   const consOptions = {
     title: "Consumption",
     pieHole: 0.25,
