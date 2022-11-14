@@ -1,6 +1,6 @@
 # solaris
 
-solaris helps you to understand the way you consume locally the energy produced by solar panel
+solaris helps you understand the way you consume locally the energy produced by solar panel
 installations.
 
 It has been specially designed for home solar panel installations.
