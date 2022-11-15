@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from "react";
 import {IoFolderOpenOutline} from "react-icons/io5";
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy} from "../models/NetEnergy";
 import {useNavigate} from "react-router-dom";
 import {readNetEnergy} from "../functions/readNetEnergy";
 
 interface SetNetEnergiesProps {
-  setEnergies: (energies: NetEnergy[]) => void
+  setEnergies: (energies: DateNetEnergy[]) => void
 }
 
 const InputNetEnergiesFile = ({setEnergies}: SetNetEnergiesProps) => {

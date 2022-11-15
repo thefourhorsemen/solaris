@@ -1,14 +1,14 @@
 import React from "react";
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy} from "../models/NetEnergy";
 import {Chart} from "react-google-charts";
 
 interface NetEnergiesProps {
-  energies: NetEnergy[];
+  energies: DateNetEnergy[];
 }
 
 const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
   const data = [["Time", "Production", "Consumption", "Exported", "Imported"]]
-  const rows = energies.map((it: NetEnergy) => it.to())
+  const rows = energies.map(it => it.to())
 
   // @ts-ignore
   rows.forEach((it: []) => data.push(it))

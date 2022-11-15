@@ -1,13 +1,11 @@
 // @ts-ignore
 import {parse} from "papaparse"
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy} from "../models/NetEnergy";
 
-export const readNetEnergy = (content: string | ArrayBuffer): NetEnergy[] => {
+export const readNetEnergy = (content: string | ArrayBuffer): DateNetEnergy[] => {
   const data = parse(content)
-  const rows = data.data
+  const rows: string[][] = data.data
   rows.shift()
 
-  return rows.filter((element: string[]) => {
-    return element.length === 5
-  }).map((element: string[]) => NetEnergy.of(element))
+  return rows.filter(element => element.length === 5).map(element => DateNetEnergy.of(element))
 }

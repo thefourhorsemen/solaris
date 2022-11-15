@@ -1,52 +1,47 @@
 import React from "react";
-import {NetEnergy} from "../models/NetEnergy";
+import {DateNetEnergy, NetEnergy} from "../models/NetEnergy";
 import NetEnergiesKpiChart from "./NetEnergiesKpiChart";
 import NetEnergiesDetailChart from "./NetEnergiesDetailChart";
 import {DateSelection} from "../models/DateSelection";
 import {Col, Row} from "react-bootstrap";
-import {groupBy, transformMap} from "../functions/Util";
+import {groupBy} from "../functions/Util";
 import {ChartType} from "../models/ChartType";
 
 interface NetEnergiesProps {
   date: DateSelection,
-  energies: NetEnergy[],
+  energies: DateNetEnergy[],
   chartType: ChartType;
 }
 
 const getGrouper = (chartType: ChartType, date: DateSelection) => {
-  return chartType === ChartType.MEASURE
-      ? date.grouper()
-      : date.dayGrouper();
+  return chartType === ChartType.MEASURE ? date.grouper() : date.dayGrouper();
 }
 
 const getComputer = (chartType: ChartType) => {
   return chartType === ChartType.MEASURE
-      ? (k: Date, v: { production: number; consumption: number; exported: number; imported: number; count: number; }) => NetEnergy.from(k, v)
-      : (k: Date, v: { production: number; consumption: number; exported: number; imported: number; count: number; }) => NetEnergy.average(k, v);
+      ? (date: Date, energies: NetEnergy[]) => new DateNetEnergy(date, NetEnergy.sum(energies))
+      : (date: Date, energies: NetEnergy[]) => new DateNetEnergy(date, NetEnergy.average(energies));
 }
 
-const groupByDate = (netEnergies: NetEnergy[], grouper: (date: Date) => number) => {
-  const grouped = groupBy(netEnergies, energy => {
-    return grouper(energy.date)
-  })
+const groupByDate = (netEnergies: DateNetEnergy[], grouper: (date: Date) => number) => {
+  const grouped = groupBy(netEnergies, energy => grouper(energy.date), energy => energy.energy)
   const result = new Map<Date, NetEnergy[]>()
   grouped.forEach((v, k) => result.set(new Date(k), v))
   return result;
 }
 
-const sum = (grouped: Map<Date, NetEnergy[]>,
-             computer: (k: Date, v: { production: number; consumption: number; exported: number; imported: number; count: number }) => NetEnergy) => {
-  const reduced = transformMap(grouped, values => NetEnergy.sumEnergies(values))
-  const result: NetEnergy[] = []
-  reduced.forEach((v, k) => result.push(computer(k, v)))
+const reduce = (grouped: Map<Date, NetEnergy[]>,
+                computer: (date: Date, energies: NetEnergy[]) => DateNetEnergy) => {
+  const result: DateNetEnergy[] = []
+  grouped.forEach((energies, date) => result.push(computer(date, energies)))
   return result
 }
 
-const selectEnergies = (date: DateSelection, energies: NetEnergy[], grouper: (date: Date) => number,
-                        computer: (k: Date, v: { production: number; consumption: number; exported: number; imported: number; count: number }) => NetEnergy): NetEnergy[] => {
+const selectEnergies = (date: DateSelection, energies: DateNetEnergy[], grouper: (date: Date) => number,
+                        computer: (date: Date, energies: NetEnergy[]) => DateNetEnergy): DateNetEnergy[] => {
   const filtered = energies.filter(energy => date.match(energy.date))
   const grouped = groupByDate(filtered, grouper);
-  return sum(grouped, computer)
+  return reduce(grouped, computer)
 }
 
 const EnergiesChart = ({date, energies, chartType}: NetEnergiesProps) => {
@@ -64,7 +59,7 @@ const EnergiesChart = ({date, energies, chartType}: NetEnergiesProps) => {
         <NetEnergiesDetailChart energies={selectedEnergies}/>
       </Col>
       <Col md={4} center>
-        <NetEnergiesKpiChart energies={selectedEnergies}/>
+        <NetEnergiesKpiChart energies={selectedEnergies.map(ds => ds.energy)}/>
       </Col>
     </Row>
   </>

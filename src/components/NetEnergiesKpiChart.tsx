@@ -8,8 +8,7 @@ interface NetEnergiesProps {
 }
 
 const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
-  const result = NetEnergy.sumEnergies(energies)
-
+  const result = NetEnergy.sum(energies)
   const autoConsumptionEnergy = result.production - result.exported
 
   const prodData = [["Energy", "kWh"], ["Locally consumed", autoConsumptionEnergy], ["Exported", result.exported]]
