@@ -2,6 +2,7 @@
   "name": "solaris",
   "version": "0.1.0",
   "private": true,
+  "homepage": "solaris",
   "dependencies": {
     "@js-joda/core": "^5.4.2",
     "@testing-library/jest-dom": "^5.16.5",

@@ -29,8 +29,9 @@ const App = () => {
   const [netEnergies, setNetEnergies] = useState(initialState)
 
   return (
-      <BrowserRouter>
-        <Suspense fallback={<div className='centered'><LoadingSpinner/></div>}>
+      <BrowserRouter basename="/solaris">
+        <Suspense
+            fallback={<div className='centered'><LoadingSpinner/></div>}>
           <Routes>
             <Route path="/" element={decorate(<EnergiesSelect setEnergies={setNetEnergies}/>)}/>
             <Route path="/display" element={decorate(<EnergiesDisplay energies={netEnergies}/>)}/>
