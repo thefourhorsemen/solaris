@@ -1,7 +1,7 @@
 # solaris
 
-solaris helps you understand the way you consume locally the energy produced by solar panel
-installations.
+solaris helps you understand the way you consume locally the energy produced by your solar panel
+installation.
 
 It has been specially designed for home solar panel installations.
 
@@ -14,6 +14,8 @@ solaris allows you to:
     * auto production: the amount of the electric installation consumption produced by solar panels
 
 Those data can be selected by day, week, month, and year.
+
+The current version of solari is available [online](https://thefourhorsemen.github.io/solaris/).
 
 ## Supported formats
 
