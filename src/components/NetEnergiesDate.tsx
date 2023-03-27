@@ -11,7 +11,7 @@ import {ChartType} from "../models/ChartType";
 import {DateRange, DateSelection} from "../models/DateSelection";
 
 const DATE_SELECTIONS = Object.keys(DateRange).filter((v) => isNaN(Number(v)))
-const DATE_RANGES = [DateRange.Day, DateRange.Week, DateRange.Month, DateRange.Year]
+const DATE_RANGES = [DateRange.Day, DateRange.Week, DateRange.Month, DateRange.Year, DateRange.All]
 const CHART_TYPES = [ChartType.MEASURE, ChartType.AVERAGE]
 
 interface NetEnergiesDateProps {

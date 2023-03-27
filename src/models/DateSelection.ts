@@ -3,7 +3,7 @@ import {DateTimeFormatOptions} from "luxon";
 import {LocalTime} from "@js-joda/core";
 
 export enum DateRange {
-  Day = 1, Week, Month, Year
+  Day = 1, Week, Month, Year, All
 }
 
 export class DateSelection {
@@ -25,6 +25,8 @@ export class DateSelection {
         return DateSelection.previousMonth(this)
       case DateRange.Year:
         return DateSelection.previousYear(this)
+      case DateRange.All:
+        return this
     }
   }
 
@@ -38,6 +40,8 @@ export class DateSelection {
         return DateSelection.nextMonth(this)
       case DateRange.Year:
         return DateSelection.nextYear(this)
+      case DateRange.All:
+        return this
     }
   }
 
@@ -55,6 +59,8 @@ export class DateSelection {
         return DateSelection.matchMonth(this.reference, date)
       case DateRange.Year:
         return DateSelection.matchYear(this.reference, date)
+      case DateRange.All:
+        return true
     }
   }
 
@@ -66,6 +72,7 @@ export class DateSelection {
       case DateRange.Month:
         return (date: Date) => Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
       case DateRange.Year:
+      case DateRange.All:
         return (date: Date) => Date.UTC(date.getFullYear(), date.getMonth())
     }
   }
@@ -84,6 +91,8 @@ export class DateSelection {
         return DateSelection.month(this.reference)
       case DateRange.Year:
         return DateSelection.year(this.reference)
+      case DateRange.All:
+        return "All"
     }
   }
 
