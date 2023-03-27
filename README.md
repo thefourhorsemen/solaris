@@ -15,7 +15,7 @@ solaris allows you to:
 
 Those data can be selected by day, week, month, and year.
 
-The current version of solari is available [online](https://thefourhorsemen.github.io/solaris/).
+The current version of solaris is available [online](https://thefourhorsemen.github.io/solaris/).
 
 ## Supported formats
 
