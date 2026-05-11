@@ -6,12 +6,10 @@ import {DateSelection} from "../models/DateSelection";
 import {Col, Row} from "react-bootstrap";
 import {groupBy} from "../functions/Util";
 import {ChartType} from "../models/ChartType";
-import {Battery} from "../models/Battery";
 
 interface NetEnergiesProps {
     date: DateSelection,
     energies: DateNetEnergy[],
-    battery: Battery
     chartType: ChartType;
 }
 
@@ -46,7 +44,7 @@ const selectEnergies = (date: DateSelection, energies: DateNetEnergy[], grouper:
     return reduce(grouped, computer)
 }
 
-const EnergiesChart = ({date, energies, battery, chartType}: NetEnergiesProps) => {
+const EnergiesChart = ({date, energies, chartType}: NetEnergiesProps) => {
     const grouper = getGrouper(chartType, date);
     const computer = getComputer(chartType);
 
@@ -61,7 +59,7 @@ const EnergiesChart = ({date, energies, battery, chartType}: NetEnergiesProps) =
                 <NetEnergiesDetailChart energies={selectedEnergies}/>
             </Col>
             <Col md={4} center>
-                <NetEnergiesKpiChart battery={battery} energies={selectedEnergies.map(ds => ds.energy)}/>
+                <NetEnergiesKpiChart energies={selectedEnergies.map(ds => ds.energy)}/>
             </Col>
         </Row>
     </>

@@ -2,7 +2,6 @@ import React from "react";
 import {NetEnergy} from "../models/NetEnergy";
 import {Chart} from "react-google-charts";
 import {Table} from "react-bootstrap";
-import {Battery} from "../models/Battery";
 
 enum EnergyUnit {
     Wh = 1, kWh = 1000, MWh = 1000000
@@ -28,11 +27,10 @@ const round = (value: number, unit: EnergyUnit): number => {
 }
 
 interface NetEnergiesProps {
-    battery: Battery
     energies: NetEnergy[];
 }
 
-const NetEnergiesKpiChart = ({battery, energies}: NetEnergiesProps) => {
+const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
     const result = NetEnergy.sum(energies)
     const unit = energyUnit(result)
 
@@ -40,7 +38,7 @@ const NetEnergiesKpiChart = ({battery, energies}: NetEnergiesProps) => {
     const consumption = round(result.consumption, unit)
     const exported = round(result.exported, unit)
     const imported = round(result.imported, unit)
-    const stored = round(battery.stored, unit)
+    const stored = round(result.stored, unit)
     const autoConsumptionEnergy = production - exported
 
     const prodData = [["Energy", energyUnit], ["Locally consumed", autoConsumptionEnergy], ["Exported", exported]]
