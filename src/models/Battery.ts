@@ -32,7 +32,15 @@ export class Battery {
         return 0;
     }
 
+    soc(): number {
+        if (this.capacity === 0) {
+            return 0
+        }
+        return this.charge / this.capacity
+    }
+
     reset() {
+        console.log("battery.reset()")
         this.charge = 0
         this.stored = 0
     }

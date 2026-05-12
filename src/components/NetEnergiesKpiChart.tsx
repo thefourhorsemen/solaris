@@ -39,6 +39,7 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
     const exported = round(result.exported, unit)
     const imported = round(result.imported, unit)
     const stored = round(result.stored, unit)
+    const released = round(result.released, unit)
     const autoConsumptionEnergy = production - exported
 
     const prodData = [["Energy", energyUnit], ["Locally consumed", autoConsumptionEnergy], ["Exported", exported]]
@@ -93,8 +94,13 @@ const NetEnergiesKpiChart = ({energies}: NetEnergiesProps) => {
                 <td align='left'>{strUnit}</td>
             </tr>
             <tr>
-                <td align='left'>Stored in battery</td>
+                <td align='left'>Stored</td>
                 <td align='right'>{stored}</td>
+                <td align='left'>{strUnit}</td>
+            </tr>
+            <tr>
+                <td align='left'>Released</td>
+                <td align='right'>{released}</td>
                 <td align='left'>{strUnit}</td>
             </tr>
             <tr>
