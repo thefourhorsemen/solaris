@@ -7,7 +7,7 @@ interface NetEnergiesProps {
 }
 
 const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
-    const data = [["Time", "Production", "Consumption", "Exported", "Imported"]]
+    const data = [["Time", "Production", "Consumption", "Exported", "Imported", "Stored", "Released"]]
     const rows = energies.map(it => it.to())
 
     // @ts-ignore
@@ -20,7 +20,7 @@ const NetEnergiesDetailChart = ({energies}: NetEnergiesProps) => {
         legend: {position: 'bottom'},
         seriesType: "bars",
         isStacked: true,
-        colors: ['blue', 'orange', 'grey', "#424242"]
+        colors: ['blue', 'orange', 'grey', 'grey', 'green', 'green']
     };
 
     return <Chart

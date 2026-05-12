@@ -33,7 +33,7 @@ const RenderAll = (energies: DateNetEnergy[]) => {
         <EnergiesChart date={currentDate} energies={energiesWithBatterySimulation}
                        chartType={chartType}/>
         <Divider/>
-        <BatteryDisplay battery={battery} setBattery={setBattery}/>
+        <BatteryDisplay setBattery={setBattery}/>
     </>
 }
 

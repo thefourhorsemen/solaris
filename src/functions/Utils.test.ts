@@ -3,8 +3,8 @@ import {DateNetEnergy, NetEnergy} from "../models/NetEnergy";
 
 // TODO
 test('day string', () => {
-    const energy1 = new DateNetEnergy(new Date("2022-08-14T16:15:00.000Z"), new NetEnergy(266, 645, 0, 379, 0))
-    const energy2 = new DateNetEnergy(new Date("2022-08-14T17:15:00.000Z"), new NetEnergy(266, 645, 0, 379, 0))
+    const energy1 = new DateNetEnergy(new Date("2022-08-14T16:15:00.000Z"), new NetEnergy(266, 645, 0, 379, 0, 0, 0))
+    const energy2 = new DateNetEnergy(new Date("2022-08-14T17:15:00.000Z"), new NetEnergy(266, 645, 0, 379, 0, 0, 0))
 
     const energies = [energy1, energy2]
 
