@@ -27,6 +27,5 @@ const simBattery = (battery: Battery, dateEnergy: DateNetEnergy): DateNetEnergy 
 }
 
 export const simulateBattery = (battery: Battery, energies: DateNetEnergy[]): DateNetEnergy[] => {
-    battery.reset()
     return energies.map(energy => simBattery(battery, energy))
 }

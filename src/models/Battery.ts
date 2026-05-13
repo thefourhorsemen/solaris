@@ -38,10 +38,4 @@ export class Battery {
         }
         return this.charge / this.capacity
     }
-
-    reset() {
-        console.log("battery.reset()")
-        this.charge = 0
-        this.stored = 0
-    }
 }

@@ -1,15 +1,26 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import {Battery} from "../models/Battery";
+import {DateNetEnergy} from "../models/NetEnergy";
+import {simulateBattery} from "../functions/simulateBattery";
+import "./BatteryDefinition.css";
 
 interface SetBatteryProps {
-    setBattery: (battery: Battery) => void
+    energies: DateNetEnergy[]
+    setEnergies: (energies: DateNetEnergy[]) => void
 }
 
-const BatteryDefinition = ({setBattery}: SetBatteryProps) => {
+function onBatteryChange(energies: DateNetEnergy[], setEnergies: (energies: DateNetEnergy[]) => void) {
+    return (event: ChangeEvent<HTMLInputElement>) => {
+        const energiesWithBatterySimulation = simulateBattery(new Battery(1000 * event.target.valueAsNumber), energies)
+        setEnergies(energiesWithBatterySimulation)
+    };
+}
+
+const BatteryDefinition = ({energies, setEnergies}: SetBatteryProps) => {
     return <>
-        <label htmlFor="batteryCapacity">Battery capacity in kWh</label>
+        <label className="battery-definition__label" htmlFor="batteryCapacity">Battery capacity in kWh</label>
         <input type="number" id="batteryCapacity" name="batteryCapacity" min="0" max="200" defaultValue="0"
-               onChange={(event) => setBattery(new Battery(1000 * event.target.valueAsNumber))}/>
+               onChange={onBatteryChange(energies, setEnergies)}/>
     </>
 }
 

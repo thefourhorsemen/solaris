@@ -4,8 +4,6 @@ import NetEnergiesDate from "./NetEnergiesDate";
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {ChartType} from "../models/ChartType";
 import EnergiesChart from "./EnergiesChart";
-import {Battery} from "../models/Battery";
-import {simulateBattery} from "../functions/simulateBattery";
 import BatteryDisplay from "./BatteryDisplay";
 
 const Divider = () => {
@@ -23,17 +21,15 @@ interface NetEnergiesProps {
 const RenderAll = (energies: DateNetEnergy[]) => {
     const [currentDate, setCurrentDate] = useState(new DateSelection(DateRange.Day, energies[energies.length - 1].date))
     const [chartType, setChartType] = useState(ChartType.MEASURE)
-    const [battery, setBattery] = useState(new Battery(0));
-
-    const energiesWithBatterySimulation = simulateBattery(battery, energies)
+    const [energiesWithBattery, setEnergiesWithBattery] = useState(energies)
 
     return <>
         <NetEnergiesDate date={currentDate} setDate={setCurrentDate} setChartType={setChartType}/>
         <Divider/>
-        <EnergiesChart date={currentDate} energies={energiesWithBatterySimulation}
+        <EnergiesChart date={currentDate} energies={energiesWithBattery}
                        chartType={chartType}/>
         <Divider/>
-        <BatteryDisplay setBattery={setBattery}/>
+        <BatteryDisplay energies={energies} setEnergies={setEnergiesWithBattery}/>
     </>
 }
 
