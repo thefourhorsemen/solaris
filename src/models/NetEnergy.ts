@@ -30,6 +30,10 @@ export class DateNetEnergy {
     to(): [Date, number, number, number, number, number, number] {
         return [this.date, this.energy.production, -this.energy.consumption, -this.energy.exported, this.energy.imported, -this.energy.stored, this.energy.released]
     }
+
+    soc(): [Date, number] {
+        return [this.date, 100 * this.energy.soc]
+    }
 }
 
 export class NetEnergy {
