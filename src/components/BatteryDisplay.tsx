@@ -1,17 +1,18 @@
 import React from "react";
-import {Battery} from "../models/Battery";
 import {Col, Row} from "react-bootstrap";
 import BatteryDefinition from "./BatteryDefinition";
+import {DateNetEnergy} from "../models/NetEnergy";
 
 interface SetBatteryProps {
-    setBattery: (battery: Battery) => void
+    energies: DateNetEnergy[]
+    setEnergies: (energies: DateNetEnergy[]) => void
 }
 
-const BatteryDisplay = ({setBattery}: SetBatteryProps) => {
+const BatteryDisplay = ({energies, setEnergies}: SetBatteryProps) => {
     return <>
         <Row>
             <Col md={4} center>
-                <BatteryDefinition setBattery={setBattery}/>
+                <BatteryDefinition energies={energies} setEnergies={setEnergies}/>
             </Col>
         </Row>
     </>
