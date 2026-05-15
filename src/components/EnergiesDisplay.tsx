@@ -4,7 +4,7 @@ import NetEnergiesDate from "./NetEnergiesDate";
 import {DateRange, DateSelection} from "../models/DateSelection";
 import {ChartType} from "../models/ChartType";
 import EnergiesChart from "./EnergiesChart";
-import BatteryDisplay from "./BatteryDisplay";
+import SimulationDisplay from "./SimulationDisplay";
 
 const Divider = () => {
     return (
@@ -29,7 +29,7 @@ const RenderAll = (energies: DateNetEnergy[]) => {
         <EnergiesChart date={currentDate} energies={energiesWithBattery}
                        chartType={chartType}/>
         <Divider/>
-        <BatteryDisplay energies={energies} setEnergies={setEnergiesWithBattery}/>
+        <SimulationDisplay energies={energies} setEnergies={setEnergiesWithBattery}/>
     </>
 }
 

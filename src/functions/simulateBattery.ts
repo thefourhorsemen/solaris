@@ -22,8 +22,8 @@ const simBattery = (battery: Battery, dateEnergy: DateNetEnergy): DateNetEnergy 
         imported -= released
     }
 
-    const batEnergy = new NetEnergy(energy.production, energy.consumption, exported, imported, stored, released, battery.soc())
-    return new DateNetEnergy(date, batEnergy)
+    const simEnergy = new NetEnergy(energy.production, energy.consumption, exported, imported, stored, released, battery.soc())
+    return new DateNetEnergy(date, simEnergy)
 }
 
 export const simulateBattery = (battery: Battery, energies: DateNetEnergy[]): DateNetEnergy[] => {
